@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>CVE漏洞查询</title>
+</head>
+<body>
+  <div>
+      {% if cve_info and cve_info != None %}
+      <table border="1">
+          {% for k, v in cve_info.items() %}
+                <tr>
+                    <td bgcolor="#faebd7">{{k}}</td>
+                    <td>{{v}}</td>
+                </tr>
+          {% endfor %}
+      </table>
+      {% else %}
+      <p>无相关数据</p>
+      {% endif %}
+  <form action="/api/v2/cve/cve_home" method="get">
+     <p><button type="submit">返回</button></p>
+  </form>
+  </div>
+</body>
+</html>

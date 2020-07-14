@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attack_types>
+  <attack_type name="网络蠕虫" id="0x140C0000">
+    <sub_attack_type name="Email蠕虫" id="0x140C0100" />
+    <sub_attack_type name="通讯蠕虫" id="0x140C0200" />
+    <sub_attack_type name="其他" id="0x140C0300" />
+  </attack_type>
+  <attack_type name="僵尸网络" id="0x14020000">
+    <sub_attack_type name="僵尸网络" id="0x14020100" />
+    <sub_attack_type name="其他" id="0x14020200" />
+  </attack_type>
+  <attack_type name="勒索软件" id="0x140D0000">
+    <sub_attack_type name="勒索软件" id="0x140D0100" />
+    <sub_attack_type name="其他" id="0x140D0200" />
+  </attack_type>
+  <attack_type name="后门程序" id="0x14010000">
+    <sub_attack_type name="后门木马" id="0x14010100" />
+    <sub_attack_type name="其他" id="0x14010200" />
+  </attack_type>
+  <attack_type name="特洛伊木马" id="0x14040000">
+    <sub_attack_type name="Android木马" id="0x14040100" />
+    <sub_attack_type name="木马下载器" id="0x14040200" />
+    <sub_attack_type name="木马释放器" id="0x14040300" />
+    <sub_attack_type name="间谍木马" id="0x14040400" />
+    <sub_attack_type name="银行木马" id="0x14040500" />
+    <sub_attack_type name="支付木马" id="0x14040600" />
+    <sub_attack_type name="点击木马" id="0x14040700" />
+    <sub_attack_type name="AOL木马" id="0x14040800" />
+    <sub_attack_type name="短消息木马" id="0x14040900" />
+    <sub_attack_type name="BAT脚本木马" id="0x14040a00" />
+    <sub_attack_type name="DOS可执行程序木马" id="0x14040b00" />
+    <sub_attack_type name="JavaScript脚本木马" id="0x14040c00" />
+    <sub_attack_type name="MS Word宏木马" id="0x14040d00" />
+    <sub_attack_type name="VBS脚本木马" id="0x14040e00" />
+    <sub_attack_type name="Win32程序木马" id="0x14040f00" />
+    <sub_attack_type name="其他" id="0x14041000" />
+  </attack_type>
+  <attack_type name="键盘记录" id="0x140A0000">
+    <sub_attack_type name="键盘记录木马" id="0x140A0100" />
+    <sub_attack_type name="其他" id="0x140A0200" />
+  </attack_type>
+  <attack_type name="远控木马" id="0x14080000">
+    <sub_attack_type name="远控木马" id="0x14080100" />
+    <sub_attack_type name="其他" id="0x14080200" />
+  </attack_type>
+  <attack_type name="窃密木马" id="0x140B0000">
+    <sub_attack_type name="窃密木马" id="0x140B0100" />
+    <sub_attack_type name="其他" id="0x140B0200" />
+  </attack_type>
+  <attack_type name="黑市工具" id="0x140E0000">
+    <sub_attack_type name="Office漏洞利用" id="0x140E0100" />
+    <sub_attack_type name="Flash漏洞利用" id="0x140E0200" />
+    <sub_attack_type name="恶意HTML代码" id="0x140E0300" />
+    <sub_attack_type name="恶意框架代码" id="0x140E0400" />
+    <sub_attack_type name="IIS漏洞利用" id="0x140E0500" />
+    <sub_attack_type name="恶意JS代码利用" id="0x140E0600" />
+    <sub_attack_type name="Linux利用工具" id="0x140E0700" />
+    <sub_attack_type name="OSX利用工具" id="0x140E0800" />
+    <sub_attack_type name="Win32利用工具" id="0x140E0900" />
+    <sub_attack_type name="CVE漏洞利用" id="0x140E0b00"/>
+    <sub_attack_type name="其他" id="0x140E0a00" />
+  </attack_type>
+  <attack_type name="恶意广告" id="0x14070000">
+    <sub_attack_type name="恶意广告" id="0x14070100" />
+    <sub_attack_type name="其他" id="0x14070200" />
+  </attack_type>
+  <attack_type name="间谍软件" id="0x14060000">
+    <sub_attack_type name="间谍软件" id="0x14060100" />
+    <sub_attack_type name="其他" id="0x14060200" />
+  </attack_type>
+  <attack_type name="电脑病毒" id="0x14050000">
+    <sub_attack_type name="电脑病毒" id="0x14050100" />
+    <sub_attack_type name="宏病毒" id="0x14050300" />
+    <sub_attack_type name="其他" id="0x14050200" />
+  </attack_type>
+  <attack_type name="流氓推广" id="0x140F0000">
+    <sub_attack_type name="流氓推广" id="0x140F0100" />
+    <sub_attack_type name="其他" id="0x140F0200" />
+  </attack_type>
+  <attack_type name="其他恶意软件" id="0x14110000">
+    <sub_attack_type name="拒绝服务工具" id="0x14110100" />
+    <sub_attack_type name="恶意应用程序" id="0x14110200" />
+    <sub_attack_type name="洪水攻击工具" id="0x14110300" />
+    <sub_attack_type name="SWF恶意脚本" id="0x14110400" />
+    <sub_attack_type name="变种" id="0x14110500" />
+    <sub_attack_type name="挖矿" id="0x14110600" />
+    <sub_attack_type name="Bat恶意脚本" id="0x14110700" />
+    <sub_attack_type name="其他" id="0x14110800" />
+  </attack_type>
+</attack_types>

@@ -1,0 +1,12 @@
+<html>
+<head>
+  <title>Cve查询</title>
+</head>
+<body>
+  <form action="/api/v2/cve/cve_info" method="get">
+    <legend>CVE 漏洞查询</legend>
+    <p><input name="cve_id" placeholder="cve编号" value="{{ cve_id }}"></p>
+     <p><button type="submit">查询</button></p>
+  </form>
+</body>
+</html>

@@ -1,0 +1,2 @@
+import pystache
+pystache.render()

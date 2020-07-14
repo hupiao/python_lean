@@ -1,0 +1,39 @@
+[group:sys]
+programs=monitor_status_0, monitor_status_1
+
+[program:guish]
+command=/opt/work/.pyenv/versions/vid/bin/python /opt/work/guish/guish_rpyc_server.py
+autostart=true
+autorestart=true
+priority=12
+redirect_stderr=true
+stdout_logfile=/var/skyeye/%(program_name)s.std
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=1
+
+[program:monitor_status_0]
+command=/opt/work/.pyenv/versions/vid/bin/python /opt/work/web/scripts/monitor_status.py 0
+;numprocs=2
+;process_name=%(program_name)s%(process_num)d
+autostart=true
+autorestart=true
+priority=12
+redirect_stderr=true
+stdout_logfile=/var/skyeye/%(program_name)s.std
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=1
+user=root
+
+[program:monitor_status_1]
+command=/opt/work/.pyenv/versions/vid/bin/python /opt/work/web/scripts/monitor_status.py 1
+;numprocs=2
+;process_name=%(program_name)s%(process_num)d
+autostart=true
+autorestart=true
+priority=12
+redirect_stderr=true
+stdout_logfile=/var/skyeye/%(program_name)s.std
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=1
+user=root
+

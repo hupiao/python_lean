@@ -1,0 +1,26 @@
+;[group:cve_web]
+;programs=webcgi,
+
+;[program:nginx]
+;# -g 'daemon off;' backgroud process
+;command=/usr/sbin/nginx -g 'daemon off;'
+;autostart=true
+;autorestart=true
+;priority=5
+;redirect_stderr=true
+;stdout_logfile=/var/skyeye/%(program_name)s.std
+;stdout_logfile_maxbytes=1MB
+;stdout_logfile_backups=1
+
+[program:cve_webfcgi]
+command=/opt/work/.pyenv/versions/vid/bin/python webapi.fcgi
+#command=/usr/bin/gunicorn -c gunicorn.conf gunicorn_wsgi:app
+autostart=true
+autorestart=true
+priority=8
+redirect_stderr=true
+directory=/opt/work/web/www/
+stdout_logfile=/var/skyeye/%(program_name)s.std
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=1
+user=root

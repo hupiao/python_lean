@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{report.base_info.file_md5}} - 检测报告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+        /* background-color: #f5f6fb; */
+        background-color: #fff;
+        /* font-family: Helvetica Neue,Helvetica,Arial,sans-serif; */
+        font-size: 18px;
+        line-height: 1.42857143;
+        color: #333;
+
+    }
+    #root {
+        /* width: 794px; */
+        margin: auto;
+        padding: 15px;
+
+    }
+    h1 {
+        margin-top: 5px;
+        margin-bottom: 20px;
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h3 {
+        font-size: 26px;
+    }
+    div.block {
+        background-color: #fff;
+        border-radius: 3px;
+        box-sizing: border-box;
+        padding: 15px 20px;
+        margin: 0px auto 15px;
+    }
+    table {
+        border-collapse:collapse;
+    }
+    table thead {
+        display: table-row-group;
+    }
+    table tr {
+        page-break-before: always;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+    table th {
+        min-width: 0;
+        line-height: 20px;
+        text-align: left;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        border: 1px solid #e1e5ee;
+        height: 38px;
+        white-space: nowrap;
+        background-color: #f1f4f9;
+        box-sizing: border-box;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0px;
+        padding: 0px 10px;
+    }
+    table td {
+        min-width: 0;
+        height: 32px;
+        line-height: 20px;
+        box-sizing: border-box;
+        text-align: left;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        border: 1px solid #e1e5ee;
+        padding: 5px 10px;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    .block .item .content{
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    .block .item .content.green {
+        color: rgb(153, 194, 0);
+    }
+    .block .item .content.orange {
+        color: rgb(254, 176, 0);
+    }
+    .block .item .content.red {
+        color: rgb(248, 88, 85);
+    }
+    .overview .left-malscore {
+        display: inline-block;
+        width: 150px;
+        text-align: center;
+    }
+    .overview table th.title {
+        width: 20%;
+    }
+    .overview table th.content {
+        width: 80%;
+    }
+    .overview .score {
+        width: 120px!important;
+        height: 120px!important;
+    }
+    .overview .score {
+        height: 120px;
+        border-radius: 50%;
+        border: 8px solid rgb(153, 194, 0);
+        display: inline-block;
+        box-sizing: border-box;
+        width: 150px;
+        color: rgb(153, 194, 0);
+        vertical-align: top;
+    }
+    .overview .score.green {
+        color: rgb(153, 194, 0);
+        border: 8px solid rgb(153, 194, 0);
+    }
+    .overview .score.yellow {
+        color: rgb(239, 226, 43);
+        border: 8px solid rgb(239, 226, 43);
+    }
+    .overview .score.orange {
+        color: rgb(254, 176, 0);
+        border: 8px solid rgb(254, 176, 0);
+    }
+    .overview .score.red {
+        color:rgb(248, 88, 85);
+        border: 8px solid rgb(248, 88, 85);
+    }
+    .overview .score .score-text {
+        margin-top: 25px;
+    }
+    .overview .score .revised {
+        margin-top: 35px;
+        text-align: center;
+    }
+    .overview .left-malscore .revised.green {
+        color: rgb(153, 194, 0);
+    }
+    .overview .scoleft.left-malscorere .revised.yellow {
+        color: rgb(239, 226, 43);
+    }
+    .overview .left-malscore .revised.orange {
+        color: rgb(254, 176, 0);
+    }
+    .overview .left-malscore .revised.red {
+        color:rgb(248, 88, 85);
+    }
+    .overview .score .score-text p {
+        text-align: center;
+        display: inline-block;
+        width: 111px;
+        margin: 0px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .overview .score .score-text p.malscore {
+        font-size: 24px;
+    }
+    .overview .table {
+        width: 730px;
+        display: inline-block;
+        margin-left: 15px;
+        vertical-align: top;
+    }
+    .item .children {
+        padding-left: 3%;
+    }
+    .block .item {
+        line-height: 30px;
+    }
+    .block .item .title {
+        width: 200px;
+        display: inline-block;
+        float: left;
+    }
+    .dynamic .detection .title {
+        min-height: 38px;
+        line-height: 38px;
+        padding-left: 15px;
+        color: #48576a;
+        cursor: pointer;
+        border: 1px solid #dfe3ec;
+        background-color: #fff;
+    }
+    .dynamic .detection .description {
+        border: 1px solid #dfe3ec;
+        border-top: none;
+        will-change: height;
+        overflow: hidden;
+        box-sizing: border-box;
+        background-color: #f1f5fe;
+        font-size: 16px;
+        color: #1f2d3d;
+        line-height: 1.769230769230769;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .dynamic .detection .description label {
+        font-weight: bold;
+    }
+    .dynamic .detection .title.orange {
+        background-color: #fff8ea;
+        color: #bf8e25;
+        border-color: #ffde98;
+    }
+    .dynamic .detection .title.red {
+        background: #fdeeee;
+        color: #b74545;
+        border-color: #f8abab;
+    }
+    .dynamic table {
+        width: 100%;
+    }
+    .dynamic p.subtitle {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .dynamic div.http table td {
+        width: 50%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .dynamic .process .item icon {
+        display: inline-block;
+        cursor: pointer;
+        width: 0;
+        height: 0;
+        vertical-align: middle;
+        margin-left: 10px;
+        border: 6px solid transparent;
+        border-right-width: 0;
+        border-left-color: #97a8be;
+        border-left-width: 9px;
+        /* -webkit-transform: rotate(0); */
+        transform: rotate(0);
+        transition: -webkit-transform .3s ease-in-out;
+        transition: transform .3s ease-in-out;
+        transition: transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
+    }
+    .dynamic .process .item icon.expanded {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        border-left-color: #2d8cf0;
+    }
+    .dynamic .process .item p {
+        display: inline-block;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+    .dynamic .process .item p span {
+        font-weight: bold;
+    }
+    .dynamic .process .item p span.pid {
+        margin-left: 15px;
+    }
+    .dynamic .screenshot img {
+        width: 100%;
+        margin-bottom: 10px;
+
+    }
+    .dynamic .behavior .item {
+        background-color: #f8f8fa;
+        font-size: 16px;
+        line-height: 130%;
+        padding: 5px 10px;
+        margin-bottom: 15px;
+    }
+    .dynamic .release-file table {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .dynamic .release-file table td.label {
+        width: 125px;
+    }
+    .dynamic .release-file table tbody tr:nth-of-type(odd) {
+        background: #f8f8fa;
+    }
+    .dynamic .behavior .item .content {
+        font-size: 16px;
+        line-height: 20px;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    .status table {
+        width: 100%;
+    }
+    .malice-type{
+        background: #f35858;
+        color: white;
+        padding: 1px 5px;
+        border-radius: 4px;
+        float: left;
+        margin-right: 10px;
+    }
+        .testing-type{
+            width: 50%;
+            float: left;
+        }
+        .testing-type-action{
+            width: 50%;
+            display: inline-block;
+        }
+        .testing-content{
+            padding: 10px 0;
+        }
+        .autograph-contnet{
+            padding-left: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="block overview">
+            <h1>检测结果总览</h1>
+            <div class="left-malscore">
+                <div class="score {{report.base_info.scan_malscore | malscore_color}}">
+                    <div class="score-text">
+                        <p>风险系数</p>
+                        <p class="malscore">{{report.base_info.scan_malscore}}</p>
+                    </div>
+                </div>
+                {% if report.base_info.is_revised == 1 %}
+                <p class="revised {{report.base_info.malscore | malscore_color}}">修正分数：{{report.base_info.malscore}}</p>
+                {% endif %}
+            </div>
+            <div class="table">
+                {% for k,v in report.detail.items() %}
+                    {% if k == "static" and v %}
+                    <div class="testing-type">
+                        <div><b>静态检测：</b></div>
+                        {% for k, s in v.items() %}
+                            <div class="testing-content">
+                                <span class="malice-type">{{k}}</span>
+                                <span>{{s}}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if k == "dynamic" and v %}
+                    <div class="testing-type-action">
+                        <div><b>动态检测：</b></div>
+                        {% for k, dy in v.items() %}
+                            <div class="testing-content">
+                                <span class="malice-type">{{k}}</span>
+                                {% for i in dy %}
+                                <span>{{i}}</span>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endif%}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="block fileinfo">
+            <h1>文件基本信息</h1>
+            <div class="info">
+                {% for k, v in report.base_info.items() %}
+                    {% if v != "" and k not in ["is_revised", "malscore", "scan_malscore"] %}
+                    <div class="item">
+                        <label class="title">{{k|key_info}}</label>
+                        <span class="content">{{v|value_info(k)}}</span>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="block static">
+            <h1>静态检测结果</h1>
+            {% for r in report.static_report %}
+            <div class="item">
+                <label class="title">{{r.name}}</label>
+                <label class="content {{r.color}}">{{r.value}}</label>
+            </div>
+            {% endfor %}
+            <div class="item">
+                {% if report.cve_info|length > 0 %}
+                <label class="title">CVE详情</label>
+                {% for r in report.cve_info %}
+                    <div class="autograph-contnet">
+                        <div>
+                            <span>{{r.name}}： </span>
+                            <label class="content {{r.color}}">{{r.value}}</label>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="block static">
+            <h1>签名检测结果</h1>
+            {% if report.sign_detail|length > 0 %}
+            <div class="item">
+                <label class="title">签名检测</label>
+                <div class="autograph-contnet">
+                {% for i in report.sign_info %}
+                <span>{{i}}</span>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="item">
+                {% if report.sign_detail %}
+                <label class="title">签名检测详情</label>
+                {% endif %}
+                <div class="autograph-contnet">
+                    {% for r in report.sign_detail %}
+                    <div>
+                        <span>{{r.name}}： </span>
+                        <label class="content {{r.color}}">{{r.value}}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+        <div class="block dynamic">
+            <h1>动态检测结果</h1>
+            {% for dynamic in report.report %}
+            <h2>{{dynamic.name}}</h2>
+            <h3>动态检测总览</h3>
+            <div class="dynamic-result">
+                <div class="item">
+                    <label class="title">检测结果</label>
+                    <label class="content {{dynamic.exploit.state | dynamic_color}}">{{dynamic.exploit.state | dynamic_text}}</label>
+                </div>
+                <div class="item">
+                    <label class="title">被检测程序</label>
+                    <label class="content">{{dynamic.exploit.prg_name}}</label>
+                </div>
+            </div>
+            <h3>动态检测行为</h3>
+            <div class="dynamic-detection">
+                {% for signature in dynamic.signatures %}
+                <div class="detection">
+                    <div class="title {{signature.severity | signature_color}}">{{signature.description}}</div>
+                    <div class="description">
+                        {% for d in signature.data %}
+                        <p><label>Process：</label>{{d}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <h3>网络行为</h3>
+            <div class="network">
+                {% if dynamic.network_host|length > 0 %}
+                <div class="outline">
+                    <p class="subtitle">外连主机</p>
+                    <table>
+                        <thead>
+                            <tr><th>IP归属地</th><th>IP</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for host in dynamic.network_host %}
+                            <tr>
+                                <td>{{host.country_name}}</td>
+                                <td>{{host.ip}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% if dynamic.network_domains|length > 0 %}
+                <div class="dns">
+                    <p class="subtitle">DNS请求域名</p>
+                    <table>
+                        <thead>
+                            <tr><th>域名</th><th>IP</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for dns in dynamic.network_domains %}
+                            <tr>
+                                <td>{{dns.domain}}</td>
+                                <td>{{dns.ip}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% if dynamic.network_tcp|length > 0 %}
+                <div class="tcp">
+                    <p class="subtitle">TCP连接</p>
+                    <table>
+                        <thead>
+                            <tr><th>目的IP</th><th>目的端口</th><th>源IP</th><th>源端口</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for tcp in dynamic.network_tcp %}
+                            <tr>
+                                <td>{{tcp.dip}}</td>
+                                <td>{{tcp.dport}}</td>
+                                <td>{{tcp.sip}}</td>
+                                <td>{{tcp.sport}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% if dynamic.network_udp|length > 0 %}
+                <div class="udp">
+                    <p class="subtitle">UDP连接</p>
+                    <table>
+                        <thead>
+                            <tr><th>目的IP</th><th>目的端口</th><th>源IP</th><th>源端口</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for udp in dynamic.network_udp %}
+                            <tr>
+                                <td>{{udp.dip}}</td>
+                                <td>{{udp.dport}}</td>
+                                <td>{{udp.sip}}</td>
+                                <td>{{udp.sport}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% if dynamic.network_http|length > 0 %}
+                <div class="http">
+                    <p class="subtitle">HTTP连接</p>
+                    <table>
+                        <thead>
+                            <tr><th>请求头</th><th>响应头</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for http in dynamic.network_http %}
+                            <tr>
+                                <td>{{http.request.replace("\r\n", "<br>")}}</td>
+                                <td>{{http.response.replace("\r\n", "<br>")}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                {% if dynamic.network_skyioc|length > 0 %}
+                <div class="ioc">
+                    <p class="subtitle">威胁情报</p>
+                    <table>
+                        <thead>
+                            <tr><th>IOC对象</th><th>恶意类型</th><th>家族/团伙</th><th>威胁详情</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for ioc in dynamic.network_skyioc %}
+                            <tr>
+                                <td>{{ioc.host}}</td>
+                                <td>{{ioc.e_malicious_types}}</td>
+                                    {% if ioc.campaign_name %}
+                                    <td>{{ioc.campaign_name}}</td>
+                                    {% else %}
+                                    <td></td>
+                                    {% endif%}
+                                <td>{{ioc.id}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            {% if dynamic.processtree|length > 0 %}
+            <h3>进程树</h3>
+            <div class="process">
+                {%- for process in dynamic.processtree recursive %}
+                <div class="item">
+                    <icon class={{"" if process.children|length == 0 else "expanded"}}></icon>
+                    <p>
+                        <span>进程名：</span>{{process.process_name}}<span class="pid">PID：</span>{{process.pid}}
+                    </p>
+                    {%- if process.children|length > 0 %}
+                    <div class="children">
+                        {{loop(process.children)}}
+                    </div>
+                    {%- endif %}
+                </div>
+                {%- endfor %}
+            </div>
+            {% endif %}
+            {% if dynamic.screenshots|length > 0 %}
+            <h3>截屏</h3>
+            <div class="screenshot">
+                {% for screenshot in dynamic.screenshots %}
+                <img src="{{screenshot.path|image_path}}" />
+                {% endfor %}
+            </div>
+            {% endif %}
+            <h3>行为记录</h3>
+            <div class="behavior">
+                {% if "files" in dynamic.behavior and dynamic.behavior.files|length > 0 %}
+                <div class="item file-fw">
+                    <p class="subtitle">文件访问</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.files)}}</p>
+                </div>
+                {% endif %}
+                {% if "read_files" in dynamic.behavior and dynamic.behavior.read_files|length > 0 %}
+                <div class="item file-dq">
+                    <p class="subtitle">文件读取</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.read_files)}}</p>
+                </div>
+                {% endif %}
+                {% if "write_files" in dynamic.behavior and dynamic.behavior.write_files|length > 0 %}
+                <div class="item file-xg">
+                    <p class="subtitle">文件修改</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.write_files)}}</p>
+                </div>
+                {% endif %}
+                {% if "keys" in dynamic.behavior and dynamic.behavior['keys']|length > 0 %}
+                <div class="item registry-fw">
+                    <p class="subtitle">注册表访问</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior['keys'])}}</p>
+                </div>
+                {% endif %}
+                {% if "read_keys" in dynamic.behavior and dynamic.behavior.read_keys|length > 0 %}
+                <div class="item file-fw">
+                    <p class="subtitle">注册表读取</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.read_keys)}}</p>
+                </div>
+                {% endif %}
+                {% if "write_keys" in dynamic.behavior and dynamic.behavior.write_keys|length > 0 %}
+                <div class="item file-fw">
+                    <p class="subtitle">注册表修改</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.write_keys)}}</p>
+                </div>
+                {% endif %}
+                {% if "delete_keys" in dynamic.behavior and dynamic.behavior.delete_keys|length > 0 %}
+                <div class="item file-fw">
+                    <p class="subtitle">注册表删除</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.delete_keys)}}</p>
+                </div>
+                {% endif %}
+                {% if "resolved_apis" in dynamic.behavior and dynamic.behavior.resolved_apis|length > 0 %}
+                <div class="item api">
+                    <p class="subtitle">API调用</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.resolved_apis)}}</p>
+                </div>
+                {% endif %}
+                {% if "mutexes" in dynamic.behavior and dynamic.behavior.mutexes|length > 0 %}
+                <div class="item mutex">
+                    <p class="subtitle">互斥体创建</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.mutexes)}}</p>
+                </div>
+                {% endif %}
+                {% if "executed_commands" in dynamic.behavior and dynamic.behavior.executed_commands|length > 0 %}
+                <div class="item commands">
+                    <p class="subtitle">命令执行</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.executed_commands)}}</p>
+                </div>
+                {% endif %}
+                {% if "created_services" in dynamic.behavior and dynamic.behavior.created_services|length > 0 %}
+                <div class="item created_services">
+                    <p class="subtitle">服务创建</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.created_services)}}</p>
+                </div>
+                {% endif %}
+                {% if "started_services" in dynamic.behavior and dynamic.behavior.started_services|length > 0 %}
+                <div class="item started_services">
+                    <p class="subtitle">服务启动</p>
+                    <p class="content">{{"<br>".join(dynamic.behavior.started_services)}}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% if dynamic.dropped|length > 0 %}
+            <h3>释放文件</h3>
+            <div class="release-file">
+                {% for drop in dynamic.dropped %}
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="label">样本名</td>
+                            <td>{{drop.name}} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">文件路径</td>
+                            <td>{{drop.guest_paths}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">样本大小</td>
+                            <td>{{drop.size}} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">样本格式</td>
+                            <td>{{drop.type}} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">样本MD5</td>
+                            <td>{{drop.md5}} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">SHA1</td>
+                            <td>{{drop.sha1}} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">CRC32</td>
+                            <td>{{drop.crc32}} </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Ssdeep</td>
+                            <td>{{drop.ssdeep}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="block status">
+            <h1>检测分析文件工作状态</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>分析环节</th>
+                        <th>检测开始时间</th>
+                        <th>检测结束时间</th>
+                        <th>检测耗时（s）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in report.info_summary.summary %}
+                    <tr>
+                        <td>{{s.environment}}</td>
+                        <td>{{s.started}}</td>
+                        <td>{{s.ended}}</td>
+                        <td>{{'< 1' if s.time_elapsed == 0 else s.time_elapsed}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
