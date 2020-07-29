@@ -301,3 +301,7 @@ class NetWorkManager(object):
         if not is_success:
             return False, response
         return True, "ok"
+
+
+if __name__ == "__main__":
+    print(1111)

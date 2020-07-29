@@ -1,16 +1,10 @@
-#!/usr/bin/pyth
-# #-*-coding:utf-8-*-
-import time
 import zmq
-import msgpack
+from random import randrange
 
 context = zmq.Context()
-sender = context.socket(zmq.PUSH)
-sender.sndhwm = 10
-sender.setsockopt(zmq.IPV6, 1)
-sender.bind("tcp://127.0.0.1:5555")
-
+socket = context.socket(zmq.PUB)
+socket.bind("tcp://*:5556")
+import  time
 while True:
-    msg = sender.send(msgpack.dumps('2'))
-    time.sleep(4)
-
+    time.sleep(2)
+    socket.send_string("xixixixix")
