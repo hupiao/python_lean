@@ -31,7 +31,7 @@ def main(path):
 
     a = A()
     setattr(a, 'a', 2)
-    print a.key
+    print(a.key)
     return data
 
 
